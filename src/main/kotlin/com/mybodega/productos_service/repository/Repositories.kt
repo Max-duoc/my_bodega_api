@@ -61,13 +61,13 @@ interface MovimientoRepository : JpaRepository<MovimientoEntity, Long> {
     // Contar movimientos por tipo
     fun countByTipo(tipo: String): Long
 
-    // Movimientos de hoy
+    // Movimientos de hoy - CORREGIDO
     @Query("""
         SELECT m FROM MovimientoEntity m 
-        WHERE DATE(m.fecha) = CURRENT_DATE 
+        WHERE m.fecha >= :fechaInicio 
         ORDER BY m.fecha DESC
     """)
-    fun findMovimientosHoy(): List<MovimientoEntity>
+    fun findMovimientosHoy(@Param("fechaInicio") fechaInicio: LocalDateTime): List<MovimientoEntity>
 
     // Movimientos de la semana
     @Query("""

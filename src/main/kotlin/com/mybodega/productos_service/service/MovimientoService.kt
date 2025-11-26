@@ -84,9 +84,10 @@ class MovimientoService(
             .map { it.toResponseDTO() }
     }
 
-    // Movimientos de hoy
+    // Movimientos de hoy - CORREGIDO
     fun findMovimientosHoy(): List<MovimientoResponseDTO> {
-        return movimientoRepository.findMovimientosHoy()
+        val inicioDelDia = LocalDateTime.now().toLocalDate().atStartOfDay()
+        return movimientoRepository.findMovimientosHoy(inicioDelDia)
             .map { it.toResponseDTO() }
     }
 
@@ -106,7 +107,7 @@ class MovimientoService(
             .map { it.toResponseDTO() }
     }
 
-    // Obtener estadísticas
+    // Obtener estadísticas - CORREGIDO
     fun getEstadisticas(): EstadisticasMovimientosDTO {
         val total = movimientoRepository.count()
 
@@ -114,8 +115,9 @@ class MovimientoService(
         val porTipo = movimientoRepository.countByTipoGrouped()
             .associate { it[0] as String to it[1] as Long }
 
-        // Movimientos de hoy
-        val hoy = movimientoRepository.findMovimientosHoy().size.toLong()
+        // Movimientos de hoy - CORREGIDO
+        val inicioDelDia = LocalDateTime.now().toLocalDate().atStartOfDay()
+        val hoy = movimientoRepository.findMovimientosHoy(inicioDelDia).size.toLong()
 
         // Movimientos de la semana
         val fechaSemana = LocalDateTime.now().minusWeeks(1)
