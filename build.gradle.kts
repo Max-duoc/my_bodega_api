@@ -29,8 +29,8 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-	// Base de datos PostgreSQL
-	runtimeOnly("org.postgresql:postgresql")
+	// Base de datos MySQL (CAMBIADO DE POSTGRESQL)
+	runtimeOnly("com.mysql:mysql-connector-j:8.2.0")
 
 	// H2 para pruebas (opcional)
 	testRuntimeOnly("com.h2database:h2")

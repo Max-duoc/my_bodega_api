@@ -1,1 +1,2 @@
-rootProject.name = "productos-service"
+// ✅ CORREGIDO: sin guion bajo
+rootProject.name = "productosservice"
